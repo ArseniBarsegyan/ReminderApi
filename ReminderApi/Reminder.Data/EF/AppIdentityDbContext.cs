@@ -20,6 +20,7 @@ namespace Reminder.Data.EF
             base.OnModelCreating(modelBuilder);
 
             modelBuilder.ApplyConfiguration(new AppIdentityTypeConfiguration<Note>("Notes", SchemaName));
+            modelBuilder.ApplyConfiguration(new AppIdentityTypeConfiguration<GalleryItemModel>("GallaryItems", SchemaName));
             modelBuilder.ApplyConfiguration(new AppIdentityTypeConfiguration<UserModel>("Users", SchemaName));
             modelBuilder.ApplyConfiguration(new AppIdentityTypeConfiguration<IdentityRole>("Roles", SchemaName));
             modelBuilder.ApplyConfiguration(new AppIdentityTypeConfiguration<IdentityUserClaim<string>>("UserClaims", SchemaName));
