@@ -16,9 +16,9 @@ namespace Reminder.WebApi.Controllers
         }
 
         [HttpGet]
-        public WeatherForecast Get()
+        public string Get()
         {
-            return new WeatherForecast();
+            return "Notes get method";
         }
     }
 }
