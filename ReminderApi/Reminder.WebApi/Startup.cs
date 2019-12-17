@@ -36,6 +36,8 @@ namespace Reminder.WebApi
             services.AddTransient(s => new AppIdentityDbContext(options.Options, ConstantsHelper.ContextSchemaName));
 
             services.AddTransient<IRepository<Note>, Repository<AppIdentityDbContext, Note>>();
+
+            services.AddCors();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
