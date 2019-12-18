@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Reminder.Data.Core;
 using Reminder.Data.Models;
 
@@ -16,6 +17,7 @@ namespace Reminder.WebApi.Controllers
         }
 
         [HttpGet]
+        [Authorize]
         public string Get()
         {
             return "Notes get method";

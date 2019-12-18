@@ -1,5 +1,7 @@
+using Microsoft.AspNetCore.Authentication.Google;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -34,10 +36,24 @@ namespace Reminder.WebApi
 #endif
             var options = new DbContextOptionsBuilder().UseSqlServer(connectionString);
             services.AddTransient(s => new AppIdentityDbContext(options.Options, ConstantsHelper.ContextSchemaName));
-
             services.AddTransient<IRepository<Note>, Repository<AppIdentityDbContext, Note>>();
-
             services.AddCors();
+
+            services.AddIdentity<UserModel, IdentityRole>()
+                .AddEntityFrameworkStores<AppIdentityDbContext>()
+                .AddDefaultTokenProviders();
+            
+            services.AddAuthentication(opt =>
+                {
+                    opt.DefaultAuthenticateScheme = GoogleDefaults.AuthenticationScheme;
+                    opt.DefaultChallengeScheme = GoogleDefaults.AuthenticationScheme;
+                })
+                .AddGoogle(opt =>
+                {
+                    opt.ClientId = "316039972239-btpdsa4bhfuofcr4iqd8l1au06cpoerd.apps.googleusercontent.com";
+                    opt.ClientSecret = "9e3ikQOA1KwIt7wc2PgGyVcm";
+                });
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -53,6 +69,7 @@ namespace Reminder.WebApi
             app.UseRouting();
 
             app.UseAuthorization();
+            app.UseAuthentication();
 
             app.UseEndpoints(endpoints =>
             {
