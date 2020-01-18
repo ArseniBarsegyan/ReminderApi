@@ -4,6 +4,7 @@ using Reminder.Data.Core;
 
 namespace Reminder.Data.Models
 {
+    [Serializable]
     public class Note : Entity
     {
         public Note()

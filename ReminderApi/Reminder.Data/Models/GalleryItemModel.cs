@@ -1,7 +1,9 @@
 ﻿using Reminder.Data.Core;
+using System;
 
 namespace Reminder.Data.Models
 {
+    [Serializable]
     public class GalleryItemModel : Entity
     {
         public string ImagePath { get; set; }
